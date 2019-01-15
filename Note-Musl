@@ -1,0 +1,12 @@
+Simple add inside red/system/config.r 
+
+```{bash}
+Linux-Musl [									; Linux default target
+	OS:			'Linux
+	format: 	'ELF
+	type:		'exe
+	dynamic-linker: "/lib/ld-musl-i386.so.1"
+]
+```
+allows us to compile for musl... 
+Actually it does not work even if it compile
