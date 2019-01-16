@@ -1,8 +1,8 @@
 
 ## Specific commits to PR to the red/GTK branch (for instance)
 
-As in my `.git/config` file, there is 2 remotes `red` (upsteam url repo) and `origin` (rcqls url repo). To Pull Request some commits form `rcqls/red:GTK` to  
-[git cherry-pick](https://mirrors.edge.kernel.org/pub/software/scm/git/docs/git-cherry-pick.html)
+As in my `.git/config` file, there is 2 remotes `red` (upsteam url repo) and `origin` (rcqls url repo). To Pull Request some commits form `rcqls/red:GTK` to `red/red:GTK` by using  
+[git cherry-pick](https://mirrors.edge.kernel.org/pub/software/scm/git/docs/git-cherry-pick.html) since `red/red:GTK` could squash some commits and new PR can include commits already pushed!
 
 ```{branch}
 git checkout -b GTK-patch-<patch-name> red/GTK # GTK from the original upstream repo
