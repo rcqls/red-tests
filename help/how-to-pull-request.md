@@ -28,3 +28,11 @@ Since this patch is not really informative locally, you could remove it locally 
 git branch -d fix-color-issue 
 ```
 
+
+## DELETE A BRANCH REMOTELY
+
+```
+cd ~/Github/red
+git push --delete origin GTK-patch-<patch-name>
+```
+
