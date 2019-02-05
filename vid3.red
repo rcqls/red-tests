@@ -25,6 +25,7 @@ view [
 	text   "Text"	300 cyan
 	check  "Check"  300 yellow
 	radio  "Radio"  300 yellow
+	radio  "Radio2" 300 yellow
 	field  "Field"  300
 	
 	;camera 300x30
