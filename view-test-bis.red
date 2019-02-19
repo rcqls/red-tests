@@ -4,7 +4,7 @@ Red [
 ]
 
 system/view/debug?: yes
-live?: system/view/auto-sync?: yes
+live?: system/view/auto-sync?: no
 
 workstation?: system/view/platform/product = 1
 os-version: system/view/platform/version
@@ -902,7 +902,7 @@ append win/pane make face! [
 
 dump-face win
 view/flags win [resize]
-;system/view/debug?: no
-;system/view/auto-sync?: yes
+system/view/debug?: no
+system/view/auto-sync?: yes
 
 recycle/on

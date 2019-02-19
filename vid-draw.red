@@ -128,7 +128,7 @@ l: layout [
 		text 10x10 "Red"
 		pen red						; test if pen color
 		font font-A 
-		text 10x20 "Red"
+		text 5x20 "Red"
 	]
 
 	base 50x60 100.70.70 draw [
