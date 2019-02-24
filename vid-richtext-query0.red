@@ -1,6 +1,6 @@
 Red[Needs: View]
 view [
-	rich-text data [font 16 "Select some text with your mouse" /font]
+	rich-text 300x300 data [font 16 "Select some text with your mouse" /font]
 	on-down [
 		bkg: reduce [ ; Background for selected text
 			as-pair caret: offset-to-caret face event/offset 0
