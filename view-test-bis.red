@@ -3,7 +3,7 @@ Red [
 	Needs: 'View
 ]
 
-system/view/debug?: yes
+system/view/debug?: no
 live?: system/view/auto-sync?: no
 
 workstation?: system/view/platform/product = 1
@@ -616,7 +616,7 @@ win/pane: reduce [
 	make face! [
 		type: 'base offset: 280x10 size: 100x100
 		options: [drag-on: 'down]
-		image: load %../../bridges/android/samples/eval/res/drawable-xxhdpi/ic_launcher.png
+		image: load %../red/bridges/android/samples/eval/res/drawable-xxhdpi/ic_launcher.png
 	]
 	tab-panel: make face! [
 		type: 'tab-panel offset: 10x320 size: 250x130
