@@ -83,7 +83,7 @@ view [
 
 			image smiley 10x10 40x40
 
-			font font-label
+			;font font-label
 			text 5x45 "image"
 	]
 ]

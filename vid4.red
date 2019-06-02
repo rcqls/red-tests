@@ -19,7 +19,7 @@ view [
 	bar: progress 50% 50x300
 	base 255.0.0.138  50x300 "Base"
 	
-	button "Button" 80x300
+	button "Button" 80x300 [tl/data: ["titi" "toto" "one" "two" "three" "four" "one" "two" "three" "four" "titi" "toto" "one" "two" "three" "four" "one" "two" "three" "four"]]
 	text   "Text"	50x300 cyan
 	check  "Check"  50x300 yellow
 	radio  "Radio"  50x300 yellow
@@ -27,7 +27,7 @@ view [
 	
 	;camera 50x300
 	
-	text-list 50x300 data ["one" "two" "three" "four"]
+	tl: text-list 50x300 data ["one" "two" "three" "four"]
 	drop-list 50x300 data ["one" 4 "two" 5 "three" 6 "four" 7] 
 	drop-down 50x300 data ["one" "two" "three" "four"]
 	

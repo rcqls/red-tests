@@ -4,11 +4,10 @@ Red [
 ]
 
 system/view/debug?: no
-live?: system/view/auto-sync?: no
-
+live?: system/view/auto-sync?: yes
+;;recycle/off
 workstation?: system/view/platform/product = 1
 os-version: system/view/platform/version
-recycle/off
 
 #switch config/OS [
 	Windows [
@@ -141,7 +140,7 @@ sub-win2: make face! [
 	]
 ]
 	
-; ;; requires pane cursor to be moved back in closing event handler
+;; requires pane cursor to be moved back in closing event handler
 
 win: make face! [
 	type: 'window text: "Red View" size: 1100x800
@@ -176,6 +175,7 @@ win: make face! [
 			"Sub2" [
 				"Sub-menu2"		sub-m2
 			]
+			"Recycle"			gc
 		]
 		"Search" [
 			"Find..."			find
@@ -208,6 +208,7 @@ win: make face! [
 					win/pane/1/text: "Hello"
 					show win/pane/1
 				]
+				gc [recycle probe stats]
 			]
 		]
 		on-close: func [face [object!] event [event!]][
@@ -445,17 +446,16 @@ win/pane: reduce [
 		]
 	]
 	edit: make face! [
-		;type: 'field text: {unicode supported: $€𐐷𤭢} offset: 10x80 size: 160x24
-		type: 'field text: {unicode supported: $€} offset: 10x80 size: 160x24
+		type: 'field text: {unicode supported: $€𐐷𤭢} offset: 10x80 size: 160x24
 		color: 255.218.18
 		para: make para! [align: 'left]
 		actors: object [
 			on-change: func [face [object!] event [event!]][
-				print ["field changed:" mold face/text lf]
+				print ["field changed:" mold face/text]
 			]
 		]
 	]
- 	make face! [
+	make face! [
 		type: 'area text: {Multiline area widget} offset: 580x24 size: 160x100
 		font: font-A
 		actors: object [
@@ -700,21 +700,24 @@ win/pane: reduce [
 			]
 		]
 	]
-	; set 'cam make face! [
-	; 	type: 'camera offset: 400x140 size: 320x240
-	; ]
+	set 'cam make face! [
+		type: 'camera offset: 400x140 size: 320x240
+	]
 	cam-list: make face! [
 		type: 'drop-list offset: 480x402 size: 160x32
 		actors: object [
 			on-create: func [face [object!]][
-				;face/data: cam/data
+				print "ici"
+				probe cam/data
+				face/data: cam/data
+				probe face/data
 			]
 			on-change: func [face [object!] event [event!]][
 				print ["changed:" face/selected]
-				;unless cam/selected = face/selected [
-				;	cam/selected: face/selected
-				;]
-				;unless live? [show cam]
+				unless cam/selected = face/selected [
+					cam/selected: face/selected
+				]
+				unless live? [show cam]
 			]
 		]
 	]
@@ -722,12 +725,12 @@ win/pane: reduce [
 		type: 'button text: "Start/Stop" offset: 400x400 size: 70x24
 		actors: object [
 			on-click: func [face [object!] event [event!]][
-				; either cam/selected [
-				; 	cam/selected: none
-				; ][
-				; 	cam/selected: cam-list/selected
-				; ]
-				; unless live? [show cam]
+				either cam/selected [
+					cam/selected: none
+				][
+					cam/selected: cam-list/selected
+				]
+				unless live? [show cam]
 			]
 		]
 	]
@@ -882,7 +885,6 @@ repeat i 3 [
 	append panel/pane make face! [
 		type:	'base
 		size:	40x40
-		para: make para! [align: 'center v-align: 'middle]
 		offset: 10x10 * i
 		text:	form i
 		color:	red + (i * 50)
@@ -904,7 +906,7 @@ append win/pane make face! [
 
 dump-face win
 view/flags win [resize]
-system/view/debug?: no
-system/view/auto-sync?: yes
+; system/view/debug?: no
+; system/view/auto-sync?: yes
 
 recycle/on

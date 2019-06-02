@@ -3,8 +3,8 @@ Red [
 	Needs: 'View
 ]
 
-system/view/debug?: no
-live?: system/view/auto-sync?: no
+system/view/debug?: yes
+live?: system/view/auto-sync?: yes
 
 workstation?: system/view/platform/product = 1
 os-version: system/view/platform/version
@@ -145,56 +145,56 @@ sub-win2: make face! [
 
 win: make face! [
 	type: 'window text: "Red View" size: 1100x800
-	menu: [
-		;popup						;-- forces context menu for window
-		"File" [
-			"New"				new
-			"Open...	F1" 	open
-			"Close	F2"			close 
-			---
-			"Save..."			save
-			"Save as..."		save-as
-			"Save All"			save-all
-			---
-			"Print..."			print
-			"Preview"			preview
-			"Page Setup..."		page-setup
-			---
-			"Exit"				exit
-		]
-		"Edit" [
-			"Undo"				undo
-			"Redo"				redo
-			---
-			"Copy	Ctrl+C"		copy
-			"Cut	Ctrl+X"		cut
-			"Paste	Ctrl+V"		paste
-			---
-			"Sub1" [
-				"Sub-menu1"		sub-m1
-			]
-			"Sub2" [
-				"Sub-menu2"		sub-m2
-			]
-		]
-		"Search" [
-			"Find..."			find
-			"Find Next"			find-next
-			"Find Previous"		find-prev
-			---
-			"Replace..."		replace
-			"Replace Next"		replace-next
-		]
-		"Deep" [
-			"Item 2"			item2
-			"Deep 2" [
-				"Item 3"		item3
-				"Deep 3" [
-					"End"		end
-				]
-			]
-		]
-	]
+	; menu: [
+	; 	;popup						;-- forces context menu for window
+	; 	"File" [
+	; 		"New"				new
+	; 		"Open...	F1" 	open
+	; 		"Close	F2"			close 
+	; 		---
+	; 		"Save..."			save
+	; 		"Save as..."		save-as
+	; 		"Save All"			save-all
+	; 		---
+	; 		"Print..."			print
+	; 		"Preview"			preview
+	; 		"Page Setup..."		page-setup
+	; 		---
+	; 		"Exit"				exit
+	; 	]
+	; 	"Edit" [
+	; 		"Undo"				undo
+	; 		"Redo"				redo
+	; 		---
+	; 		"Copy	Ctrl+C"		copy
+	; 		"Cut	Ctrl+X"		cut
+	; 		"Paste	Ctrl+V"		paste
+	; 		---
+	; 		"Sub1" [
+	; 			"Sub-menu1"		sub-m1
+	; 		]
+	; 		"Sub2" [
+	; 			"Sub-menu2"		sub-m2
+	; 		]
+	; 	]
+	; 	"Search" [
+	; 		"Find..."			find
+	; 		"Find Next"			find-next
+	; 		"Find Previous"		find-prev
+	; 		---
+	; 		"Replace..."		replace
+	; 		"Replace Next"		replace-next
+	; 	]
+	; 	"Deep" [
+	; 		"Item 2"			item2
+	; 		"Deep 2" [
+	; 			"Item 3"		item3
+	; 			"Deep 3" [
+	; 				"End"		end
+	; 			]
+	; 		]
+	; 	]
+	; ]
 	actors: object [
 		on-menu: func [face [object!] event [event!]][
 			print ["menu selected:" event/picked]
@@ -445,13 +445,12 @@ win/pane: reduce [
 		]
 	]
 	edit: make face! [
-		;type: 'field text: {unicode supported: $€𐐷𤭢} offset: 10x80 size: 160x24
-		type: 'field text: {unicode supported: $€} offset: 10x80 size: 160x24
+		type: 'field text: {unicode supported: $€𐐷𤭢} offset: 10x80 size: 160x24
 		color: 255.218.18
 		para: make para! [align: 'left]
 		actors: object [
 			on-change: func [face [object!] event [event!]][
-				print ["field changed:" mold face/text lf]
+				print ["field changed:" mold face/text]
 			]
 		]
 	]
@@ -700,21 +699,21 @@ win/pane: reduce [
 			]
 		]
 	]
-	; set 'cam make face! [
-	; 	type: 'camera offset: 400x140 size: 320x240
-	; ]
+	set 'cam make face! [
+		type: 'camera offset: 400x140 size: 320x240
+	]
 	cam-list: make face! [
 		type: 'drop-list offset: 480x402 size: 160x32
 		actors: object [
 			on-create: func [face [object!]][
-				;face/data: cam/data
+				face/data: cam/data
 			]
 			on-change: func [face [object!] event [event!]][
 				print ["changed:" face/selected]
-				;unless cam/selected = face/selected [
-				;	cam/selected: face/selected
-				;]
-				;unless live? [show cam]
+				unless cam/selected = face/selected [
+					cam/selected: face/selected
+				]
+				unless live? [show cam]
 			]
 		]
 	]
@@ -722,12 +721,12 @@ win/pane: reduce [
 		type: 'button text: "Start/Stop" offset: 400x400 size: 70x24
 		actors: object [
 			on-click: func [face [object!] event [event!]][
-				; either cam/selected [
-				; 	cam/selected: none
-				; ][
-				; 	cam/selected: cam-list/selected
-				; ]
-				; unless live? [show cam]
+				either cam/selected [
+					cam/selected: none
+				][
+					cam/selected: cam-list/selected
+				]
+				unless live? [show cam]
 			]
 		]
 	]
@@ -882,7 +881,6 @@ repeat i 3 [
 	append panel/pane make face! [
 		type:	'base
 		size:	40x40
-		para: make para! [align: 'center v-align: 'middle]
 		offset: 10x10 * i
 		text:	form i
 		color:	red + (i * 50)
@@ -904,7 +902,7 @@ append win/pane make face! [
 
 dump-face win
 view/flags win [resize]
-system/view/debug?: no
-system/view/auto-sync?: yes
+;system/view/debug?: no
+;system/view/auto-sync?: yes
 
 recycle/on

@@ -1,0 +1,2 @@
+Red[Needs: View]
+view [base draw [translate 0x0 [pen red line 0x0 50x50] translate 10x0 [pen red  line 0x0 50x50]]]
